@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MovieLibrary.Api.Mapping;
 using MovieLibrary.Data;
 using MovieLibrary.Data.Contracts;
 
@@ -26,6 +27,12 @@ namespace MovieLibrary.Api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<MoviesMapping>();
+                cfg.AddProfile<CategoryMapping>();
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(options =>
