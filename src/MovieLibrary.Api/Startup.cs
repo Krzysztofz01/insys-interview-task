@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using MovieLibrary.Api.Mapping;
+using MovieLibrary.Api.Middleware;
+using MovieLibrary.Core;
+using MovieLibrary.Core.Contracts;
+using MovieLibrary.Core.Mapping;
 using MovieLibrary.Data;
 using MovieLibrary.Data.Contracts;
 
@@ -27,6 +30,8 @@ namespace MovieLibrary.Api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IMovieService, MovieService>();
 
             services.AddAutoMapper(cfg =>
             {
@@ -63,6 +68,8 @@ namespace MovieLibrary.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
