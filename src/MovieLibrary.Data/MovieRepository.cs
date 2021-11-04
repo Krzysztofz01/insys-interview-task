@@ -26,7 +26,10 @@ namespace MovieLibrary.Data
 
         public async Task<Movie> GetMovieByIdAsync(int id)
         {
-            return await _context.Movies.FindAsync(id);
+            return await _context.Movies
+                .Include(m => m.MovieCategories)
+                .ThenInclude(m => m.Category)
+                .SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync()
