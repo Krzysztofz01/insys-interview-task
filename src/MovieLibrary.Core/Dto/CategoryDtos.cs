@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static MovieLibrary.Api.Dto.MovieDtos;
+using static MovieLibrary.Core.Dto.MovieDtos;
 
-namespace MovieLibrary.Api.Dto
+namespace MovieLibrary.Core.Dto
 {
     public static class CategoryDtos
     {
@@ -16,6 +16,12 @@ namespace MovieLibrary.Api.Dto
             public int Id { get; set; }
             public string Name { get; set; }
             public IEnumerable<MovieSimple> Movies { get; set; }
+        }
+
+        public class CategoryCreate
+        {
+            public string Name { get; set; }
+            public IEnumerable<int> MovieIds { get; set; }
         }
     }
 }

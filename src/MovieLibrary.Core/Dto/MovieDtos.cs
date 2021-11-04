@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static MovieLibrary.Api.Dto.CategoryDtos;
+using static MovieLibrary.Core.Dto.CategoryDtos;
 
-namespace MovieLibrary.Api.Dto
+namespace MovieLibrary.Core.Dto
 {
     public static class MovieDtos
     {
@@ -22,6 +22,15 @@ namespace MovieLibrary.Api.Dto
             public int Year { get; set; }
             public decimal ImdbRating { get; set; }
             public IEnumerable<CategorySimple> Categories { get; set; }
+        }
+
+        public class MovieCreate
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public int Year { get; set; }
+            public decimal ImdbRating { get; set; }
+            public IEnumerable<int> CategoryIds { get; set; }
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MovieLibrary.Data.Entities;
 using System.Linq;
-using static MovieLibrary.Api.Dto.CategoryDtos;
+using static MovieLibrary.Core.Dto.CategoryDtos;
 
-namespace MovieLibrary.Api.Mapping
+namespace MovieLibrary.Core.Mapping
 {
     public class CategoryMapping : Profile
     {
