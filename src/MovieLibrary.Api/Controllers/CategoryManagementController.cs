@@ -10,11 +10,11 @@ namespace MovieLibrary.Api.Controllers
     [Route("v{version:apiVersion}/CategoryManagement")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoryManagementController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoryManagementController(ICategoryService categoryService)
         {
             _categoryService = categoryService ??
                 throw new ArgumentNullException(nameof(categoryService));

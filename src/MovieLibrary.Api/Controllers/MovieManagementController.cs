@@ -10,30 +10,24 @@ namespace MovieLibrary.Api.Controllers
     [Route("v{version:apiVersion}/MovieManagement")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class MovieManagementController : ControllerBase
     {
         private readonly IMovieService _movieService;
 
-        public MoviesController(IMovieService movieService)
+        public MovieManagementController(IMovieService movieService)
         {
             _movieService = movieService ??
                 throw new ArgumentNullException(nameof(movieService));
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMovies([FromQuery] string text, [FromQuery] string categoriesId, [FromQuery] decimal? minImdb, [FromQuery] decimal? maxImdb)
+        public async Task<IActionResult> GetMovies()
         {
             var movies = await _movieService.GetAllMovies();
 
-            if (text != null) movies = _movieService.FilterByKeyword(movies, text);
-
-            if (categoriesId != null) movies = _movieService.FilterByCategory(movies, categoriesId.Split(','));
-
-            if (maxImdb.HasValue && minImdb.HasValue) movies = _movieService.FilterByImdbRange(movies, minImdb.Value, maxImdb.Value);
-
             if (!movies.Any()) return NotFound();
 
-            return Ok(movies.OrderByDescending(m => m.ImdbRating));
+            return Ok(movies);
         }
 
         [HttpPost]
