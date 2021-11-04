@@ -68,6 +68,7 @@ namespace MovieLibrary.Core
         public async Task UpdateCategory(int categoryId, CategoryRequest category)
         {
             var categoryEntity = await _unitOfWork.CategoryRepository.GetCategoryByIdAsync(categoryId);
+            if (categoryEntity is null) throw new InvalidOperationException("Entity not found");
 
             var movies = await _unitOfWork.MovieRepository.
                 GetMoviesAsync(m => category.MovieIds.Contains(m.Id));

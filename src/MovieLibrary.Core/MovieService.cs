@@ -73,6 +73,8 @@ namespace MovieLibrary.Core
 
         public IEnumerable<MovieDetails> FilterByImdbRange(IEnumerable<MovieDetails> movies, decimal minImdb, decimal maxImdb)
         {
+            if (minImdb > maxImdb) throw new ArgumentException("The minial value can not be greater than the maximal value");
+
             return movies.Where(m => m.ImdbRating >= minImdb && m.ImdbRating <= maxImdb);
         }
 
@@ -88,6 +90,8 @@ namespace MovieLibrary.Core
         {
             var movieEntity = await _unitOfWork.MovieRepository
                 .GetMovieByIdAsync(movieId);
+
+            if (movieEntity is null) throw new InvalidOperationException("Entity not found");
 
             var categories = await _unitOfWork.CategoryRepository
                 .GetCategoriesAsync(c => movie.CategoryIds.Contains(c.Id));

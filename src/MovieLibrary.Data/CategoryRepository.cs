@@ -26,18 +26,22 @@ namespace MovieLibrary.Data
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
+            //The output of this method does not require tracing, its disabled for better performance.
             return await _context.Categories
                 .Include(c => c.MovieCategories)
                 .ThenInclude(c => c.Movie)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync(Expression<Func<Category, bool>> predicate)
         {
+            //The output of this method does not require tracing, its disabled for better performance.
             return await _context.Categories
                 .Include(c => c.MovieCategories)
                 .ThenInclude(c => c.Movie)
                 .Where(predicate)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
