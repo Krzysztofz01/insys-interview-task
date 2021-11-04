@@ -24,7 +24,7 @@ namespace MovieLibrary.Core.Dto
             public IEnumerable<CategorySimple> Categories { get; set; }
         }
 
-        public class MovieCreate
+        public class MovieRequest
         {
             public string Title { get; set; }
             public string Description { get; set; }

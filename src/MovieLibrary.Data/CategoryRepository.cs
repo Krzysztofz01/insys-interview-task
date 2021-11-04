@@ -19,9 +19,9 @@ namespace MovieLibrary.Data
                 throw new ArgumentNullException(nameof(movieLibraryContext));
         }
 
-        public void DeleteCategory(Category movie)
+        public void DeleteCategory(Category category)
         {
-            _context.Categories.Remove(movie);
+            _context.Categories.Remove(category);
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
@@ -49,14 +49,14 @@ namespace MovieLibrary.Data
                 .SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task InsertCategoryAsync(Category movie)
+        public async Task InsertCategoryAsync(Category category)
         {
-            await _context.Categories.AddAsync(movie);
+            await _context.Categories.AddAsync(category);
         }
 
-        public void UpdateCategory(Category movie)
+        public void UpdateCategory(Category category)
         {
-            _context.Entry(movie).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
         }
     }
 }

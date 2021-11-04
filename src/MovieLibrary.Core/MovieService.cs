@@ -24,7 +24,7 @@ namespace MovieLibrary.Core
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task AddMovie(MovieCreate movie)
+        public async Task AddMovie(MovieRequest movie)
         {
             var categories = await _unitOfWork.CategoryRepository
                 .GetCategoriesAsync(c => movie.CategoryIds.Contains(c.Id));
@@ -84,7 +84,7 @@ namespace MovieLibrary.Core
             return _mapper.Map<MovieDetails>(movie);
         }
 
-        public async Task UpdateMovie(int movieId, MovieCreate movie)
+        public async Task UpdateMovie(int movieId, MovieRequest movie)
         {
             var movieEntity = await _unitOfWork.MovieRepository
                 .GetMovieByIdAsync(movieId);

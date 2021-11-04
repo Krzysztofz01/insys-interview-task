@@ -11,8 +11,8 @@ namespace MovieLibrary.Data.Contracts
         Task<IEnumerable<Category>> GetCategoriesAsync();
         Task<IEnumerable<Category>> GetCategoriesAsync(Expression<Func<Category, bool>> predicate);
         Task<Category> GetCategoryByIdAsync(int id);
-        Task InsertCategoryAsync(Category movie);
-        void DeleteCategory(Category movie);
-        void UpdateCategory(Category movie);
+        Task InsertCategoryAsync(Category category);
+        void DeleteCategory(Category category);
+        void UpdateCategory(Category category);
     }
 }

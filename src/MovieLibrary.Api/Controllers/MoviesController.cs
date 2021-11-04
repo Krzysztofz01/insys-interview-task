@@ -21,23 +21,23 @@ namespace MovieLibrary.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMovies([FromQuery] string text, [FromQuery] string categories, [FromQuery] decimal? minImdb, [FromQuery] decimal? maxImdb)
+        public async Task<IActionResult> GetMovies([FromQuery] string text, [FromQuery] string categoriesId, [FromQuery] decimal? minImdb, [FromQuery] decimal? maxImdb)
         {
             var movies = await _movieService.GetAllMovies();
 
             if (text != null) movies = _movieService.FilterByKeyword(movies, text);
 
-            if (categories != null) movies = _movieService.FilterByCategory(movies, categories.Split(','));
+            if (categoriesId != null) movies = _movieService.FilterByCategory(movies, categoriesId.Split(','));
 
             if (maxImdb.HasValue && minImdb.HasValue) movies = _movieService.FilterByImdbRange(movies, minImdb.Value, maxImdb.Value);
 
             if (!movies.Any()) return NotFound();
 
-            return Ok(movies);
+            return Ok(movies.OrderByDescending(m => m.ImdbRating));
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostMovie(MovieCreate movie)
+        public async Task<IActionResult> PostMovie(MovieRequest movie)
         {
             await _movieService.AddMovie(movie);
 
@@ -63,7 +63,7 @@ namespace MovieLibrary.Api.Controllers
         }
 
         [HttpPut("{movieId}")]
-        public async Task<IActionResult> PutMovie(int movieId, [FromBody]MovieCreate movie)
+        public async Task<IActionResult> PutMovie(int movieId, [FromBody]MovieRequest movie)
         {
             await _movieService.UpdateMovie(movieId, movie);
 

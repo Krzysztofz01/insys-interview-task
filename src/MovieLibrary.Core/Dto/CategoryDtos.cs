@@ -18,7 +18,7 @@ namespace MovieLibrary.Core.Dto
             public IEnumerable<MovieSimple> Movies { get; set; }
         }
 
-        public class CategoryCreate
+        public class CategoryRequest
         {
             public string Name { get; set; }
             public IEnumerable<int> MovieIds { get; set; }

@@ -13,8 +13,8 @@ namespace MovieLibrary.Core.Contracts
         IEnumerable<MovieDetails> FilterByImdbRange(IEnumerable<MovieDetails> movies, decimal minImdb, decimal maxImdb);
 
         Task<MovieDetails> GetMovieById(int movieId);
-        Task AddMovie(MovieCreate movie);
-        Task UpdateMovie(int movieId, MovieCreate movie);
+        Task AddMovie(MovieRequest movie);
+        Task UpdateMovie(int movieId, MovieRequest movie);
         Task DeleteMovie(int movieId);
     }
 }
