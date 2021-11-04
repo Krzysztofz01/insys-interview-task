@@ -28,7 +28,7 @@ namespace MovieLibrary.Data
         {
             return await _context.Categories
                 .Include(c => c.MovieCategories)
-                .ThenInclude(c => c.Category)
+                .ThenInclude(c => c.Movie)
                 .ToListAsync();
         }
 
@@ -36,7 +36,7 @@ namespace MovieLibrary.Data
         {
             return await _context.Categories
                 .Include(c => c.MovieCategories)
-                .ThenInclude(c => c.Category)
+                .ThenInclude(c => c.Movie)
                 .Where(predicate)
                 .ToListAsync();
         }
@@ -45,7 +45,7 @@ namespace MovieLibrary.Data
         {
             return await _context.Categories
                 .Include(c => c.MovieCategories)
-                .ThenInclude(c => c.Category)
+                .ThenInclude(c => c.Movie)
                 .SingleOrDefaultAsync(c => c.Id == id);
         }
 

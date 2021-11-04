@@ -32,6 +32,7 @@ namespace MovieLibrary.Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddAutoMapper(cfg =>
             {
